@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Mission to Mars</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+
+<body>
+  <div class="container">
+
+    <div class="jumbotron text-center">
+      <h1>Mission to Mars</h1>
+      <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a></p>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <h3>Latest Mars News</h3>
+        <h4>{{ final_dict.news_title }}</h4>
+        <h5>{{ final_dict.news_p }}</h5>
+      </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+          <h3>Featured Mars Image</h3>
+          <img src = "{{ final_dict.featured_image_url }}">
+        </div>
+
+
+        <div class="col-md-4">
+            <h4>Mars Facts</h4>
+            <!-- Citation: https://stackoverflow.com/questions/44666837/flask-producing-html-table-as-a-string-not-a-table-python-2 -->
+            <table class="table table-striped" {{ final_dict.factstable_html | safe}}></table>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+          <h3><center>Mars Hemispheres</center></h3>
+        </div>
+    </div>
+
+  <hr>
+    <div class="row">
+      {% for hemi in final_dict.hemisphere_images %} 
+      <div class="col-md-6">
+        <img width = 100% length=100% style="margin:25px" src="{{hemi.img_url}}">
+          <h4 style="text-align:center"> {{hemi.title}} </h4>
+        </div> 
+      {% endfor %}
+          
+    </div>
+  </div>
+</body>
+
+</html>
