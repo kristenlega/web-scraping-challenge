@@ -16,11 +16,12 @@ def init_browser():
 def scrape():
     browser = init_browser()
     final_dict={}
+    news_title = 0
 
     # NASA MARS ARTICLE
     url = 'https://mars.nasa.gov/news/'
     # Retrieve page with the requests module
-    response = requests.get(url)
+    response = requests.get(url, headers={'Cache-Control': 'no-cache'})
     # Create BeautifulSoup object; parse with 'html.parser'
     soup = BeautifulSoup(response.text, 'html.parser')
     # Parse the page for the first "content_title" element
